@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Player with Watermark</title>
+    <script src="https://cdn.jsdelivr.net/npm/videojs-video-element/+esm" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/player.style/yt/+esm" type="module"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .player-container {
+            width: 100%;
+            max-width: 800px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+        
+        media-theme-yt {
+            width: 100%;
+            --media-theme-yt-primary: #ff0000;
+        }
+        
+        .watermark {
+            position: absolute;
+            top: 3px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.85);
+            font-family: 'Playfair Display', serif;
+            font-size: 10px;
+            font-weight: 600;
+            font-style: italic;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+            z-index: 100;
+            pointer-events: none;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="player-container">
+        <div class="watermark">BD BOX TV</div>
+        <media-theme-yt style="width: 100%;">
+            <videojs-video 
+                crossorigin="anonymous" 
+                playsinline 
+                slot="media" 
+                src="https://plu1.myluck1.top:8088/live/webcricn04/playlist.m3u8?vidictid=203551079003&id=114607&pk=1fd32e02403475213644684e2dcaa23c4c48d7d5612fdc03bbae56af91db8dcbaa849686f2446f108859cd98ff463962007f012a2491b099182160e8f393249d"
+                poster="https://res.cloudinary.com/dlklqihg6/image/upload/v1758680717/x2jfniebophgax5sr5ui.png"
+            ></videojs-video>
+        </media-theme-yt>
+    </div>
+
+    <script>
+        // Adjust player height based on aspect ratio
+        function adjustPlayerHeight() {
+            const player = document.querySelector('media-theme-yt');
+            const width = player.clientWidth;
+            // Using 16:9 aspect ratio
+            const height = width * (9/16);
+            player.style.height = `${height}px`;
+        }
+        
+        // Adjust on load and resize
+        window.addEventListener('load', adjustPlayerHeight);
+        window.addEventListener('resize', adjustPlayerHeight);
+    </script>
+</body>
+</html>
